@@ -1,0 +1,38 @@
+Criar um pedido:
+  - criar registro OMIE_ORDERS:
+      omie_codigo_pedido: <idPedido>
+      omie_numero_pedido: <null>
+      omie_codigo_pedido_integracao: <null>
+      numero_pedido: <numeroPedido>
+      empresa_cod: <null>
+      cliente_cod: <idCliente>
+      cliente_nome: <null> // obter via API https://app.omie.com.br/api/v1/geral/clientes/
+      status_etapa: <etapa>
+        00 Digitação
+        01 Importado
+        10 Pendente
+        20 Em Andamento
+        30 Atendido Parcialmente
+        40 Atendido
+        50 Faturado
+        60 Faturado Parcialmente
+        70 Cancelado
+      bloqueado: Default "S"
+      categoria_cod: <codigoCategoria>
+      vendedor_cod: <null>
+      transportadora_cod: API de CONSULTA de PEDIDO https://app.omie.com.br/api/v1/produtos/pedido/ - <frete.codigo_transportadora>
+      origem_pedido: API de CONSULTA de PEDIDO https://app.omie.com.br/api/v1/produtos/pedido/ - <cabecalho.origem_pedido>
+      data_emissao: Date now
+      data_previsao: <dataPrevisao>
+      data_entrega: <null>
+      total_valor: <null>
+      total_descontos: <null>
+      frete_valor: <null>
+      observacoes: API de CONSULTA de PEDIDO https://app.omie.com.br/api/v1/produtos/pedido/ - <observacoes.obs_venda>
+      raw: <null>
+      created_at: <null>
+      updated_at: <null>
+      categoria_nome: API https://app.omie.com.br/api/v1/geral/categorias/ - <descricao>
+      vendedor_nome: API https://app.omie.com.br/api/v1/geral/vendedores/ - <nome>
+      transportadora_nome: API de CONSULTA de Cliente https://app.omie.com.br/api/v1/geral/clientes/ - <razao_social>
+      etapa_descricao: <etapaDescr>

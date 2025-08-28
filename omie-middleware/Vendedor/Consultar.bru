@@ -1,0 +1,24 @@
+meta {
+  name: Consultar
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://app.omie.com.br/api/v1/crm/usuarios/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "call": "ObterUsuarios",
+    "app_key": "2348634984696",
+    "app_secret": "382ce3ac7538f199dd0cc9fd7383ab20",
+    "param": [
+      {
+        "nCodigo": "4231533695"
+      }
+    ]
+  }
+}

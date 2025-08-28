@@ -1,0 +1,32 @@
+meta {
+  name: Consultar
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://app.omie.com.br/api/v1/produtos/pedido/
+  body: json
+  auth: none
+}
+
+headers {
+  Content-type: application/json
+}
+
+body:json {
+  {
+    "call": "ConsultarPedido",
+    "app_key": "2348634984696",
+    "app_secret": "382ce3ac7538f199dd0cc9fd7383ab20",
+    "param": [
+      {
+        "codigo_pedido": "4690048246"
+      }
+    ]
+  }
+}
+
+body:text {
+  {"call":"ConsultarPedido","param":[{"codigo_pedido":4691442312}],"app_key":"2348634984696","app_secret":"382ce3ac7538f199dd0cc9fd7383ab20"}
+}
