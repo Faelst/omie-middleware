@@ -1,25 +1,15 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { Knex } from 'knex';
-import { InjectConnection } from 'nest-knexjs';
 import { WebhookOrdersDto } from './dtos/webhook-orders.dto';
+import { CreateOrUpdateOrderUseCase } from './usecases/create-updated-order.uscase';
 
 @Controller('webhooks/orders')
 export class OrdersController {
-  constructor(@InjectConnection() private readonly knex: Knex) {}
+  constructor(
+    private readonly createOrUpdateOrderUseCase: CreateOrUpdateOrderUseCase,
+  ) {}
 
   @Post('')
   async omieWebhook(@Body() body: WebhookOrdersDto): Promise<boolean> {
-    const { event } = body;
-
-    const sale = await this.knex
-      .table('omie_orders')
-      .where({ omie_codigo_pedido: Number(event.idPedido) })
-      .first();
-
-    if (!sale) {
-      return false;
-    }
-
-    return true;
+    return this.createOrUpdateOrderUseCase.execute(body);
   }
 }
