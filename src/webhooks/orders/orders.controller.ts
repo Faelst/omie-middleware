@@ -9,8 +9,7 @@ export class OrdersController {
   ) {}
 
   @Post('')
-  async omieWebhook(@Body() body: any): Promise<boolean> {
-    return true;
-    // return this.createOrUpdateOrderUseCase.execute(body);
+  async omieWebhook(@Body() body: WebhookOrdersDto): Promise<boolean> {
+    return this.createOrUpdateOrderUseCase.execute(body);
   }
 }
