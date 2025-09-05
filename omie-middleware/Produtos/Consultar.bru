@@ -1,0 +1,26 @@
+meta {
+  name: Consultar
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://app.omie.com.br/api/v1/produtos/pedido/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "call": "ListarPedidos",
+    "app_key": "2348634984696",
+    "app_secret": "382ce3ac7538f199dd0cc9fd7383ab20",
+    "param": [
+      {
+        "pagina": 1,
+        "registros_por_pagina": 100,
+        "apenas_importado_api": "N"
+      }
+    ]
+  }
+}

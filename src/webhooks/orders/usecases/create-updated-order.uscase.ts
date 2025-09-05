@@ -19,7 +19,11 @@ export class CreateOrUpdateOrderUseCase {
   async execute(dto: WebhookOrdersDto): Promise<boolean> {
     const { event } = dto;
 
-    const omieCodigoPedido = toNumberOrNull(event.idPedido);
+    if (event?.idPedido) {
+      return true;
+    }
+
+    const omieCodigoPedido = toNumberOrNull(event?.idPedido);
 
     if (!omieCodigoPedido) {
       this.logger.warn(`Webhook sem idPedido válido: ${event?.idPedido}`);

@@ -1,3 +1,7 @@
+https://edmilsonrodrigues.com.br/allbanho/mapeamento/itens.html
+
+###################
+
 Criar um pedido:
   - criar registro OMIE_ORDERS:
       omie_codigo_pedido: <idPedido>
@@ -36,4 +40,5 @@ Criar um pedido:
       vendedor_nome: API https://app.omie.com.br/api/v1/geral/vendedores/ - <nome>
       transportadora_nome: API de CONSULTA de Cliente https://app.omie.com.br/api/v1/geral/clientes/ - <razao_social>
       etapa_descricao: <etapaDescr>
+
 
