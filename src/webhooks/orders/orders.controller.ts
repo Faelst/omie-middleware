@@ -1,6 +1,6 @@
-import { Body, Controller, Post } from '@nestjs/common';
-// import { WebhookOrdersDto } from './dtos/webhook-orders.dto';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { CreateOrUpdateOrderUseCase } from './usecases/create-updated-order.uscase';
+import { WebhookOrdersDto } from './dtos/webhook-orders.dto';
 
 @Controller('webhooks/orders')
 export class OrdersController {
@@ -9,7 +9,8 @@ export class OrdersController {
   ) {}
 
   @Post('')
-  async omieWebhook(@Body() body: any): Promise<boolean> {
+  @HttpCode(200)
+  async omieWebhook(@Body() body: WebhookOrdersDto): Promise<boolean> {
     return this.createOrUpdateOrderUseCase.execute(body);
   }
 }

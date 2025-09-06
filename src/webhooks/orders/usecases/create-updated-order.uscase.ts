@@ -19,7 +19,7 @@ export class CreateOrUpdateOrderUseCase {
   async execute(dto: WebhookOrdersDto): Promise<boolean> {
     const { event } = dto;
 
-    if (event?.idPedido) {
+    if (!event?.idPedido) {
       return true;
     }
 
@@ -113,6 +113,33 @@ export class CreateOrUpdateOrderUseCase {
         this.logger.log(
           `Atualizado pedido omie_codigo_pedido=${omieCodigoPedido}`,
         );
+      }
+
+      this.logger.log(
+        `Finalizado processamento do webhook para idPedido=${event?.idPedido}`,
+      );
+
+      await trx('omie_order_items')
+        .where({ order_id: order.cabecalho.codigo_pedido })
+        .delete();
+
+      for (const item of order?.det || []) {
+        await trx('omie_order_items').insert({
+          order_id: order.cabecalho.codigo_pedido,
+          omie_codigo_item: item.ide.codigo_item,
+          sku: item.produto.codigo,
+          descricao: item.produto.descricao,
+          ncm: item.produto.ncm,
+          ean: item.produto.ean,
+          cfop: item.produto.cfop,
+          unidade: item.produto.unidade,
+          localizacao: item.inf_adic.codigo_local_estoque,
+          categoria_item_cod: item.inf_adic.codigo_categoria_item,
+          quantidade: item.produto.quantidade,
+          valor_unitario: item.produto.valor_unitario,
+          valor_total: item.produto.valor_total,
+          desconto_percent: item.produto.percentual_desconto,
+        });
       }
     });
 
