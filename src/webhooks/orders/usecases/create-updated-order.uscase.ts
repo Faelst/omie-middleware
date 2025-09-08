@@ -19,7 +19,12 @@ export class CreateOrUpdateOrderUseCase {
   async execute(dto: WebhookOrdersDto): Promise<boolean> {
     const { event } = dto;
 
+    this.logger.log(
+      `payload recebido para processamento do webhook: ${JSON.stringify(dto)}`,
+    );
+
     if (!event?.idPedido) {
+      this.logger.warn(`Webhook sem idPedido: ${JSON.stringify(event)}`);
       return true;
     }
 
@@ -47,6 +52,8 @@ export class CreateOrUpdateOrderUseCase {
     ]);
 
     const origemPedido = order?.cabecalho?.origem_pedido ?? null;
+
+    //alterar aqui
     const vendedorCod = toNumberOrNull(
       order?.cabecalho?.codigo_vendedor ?? null,
     );
@@ -78,7 +85,6 @@ export class CreateOrUpdateOrderUseCase {
         cliente_cod: clientId,
         cliente_nome: clienteNome,
         status_etapa: etapa,
-        bloqueado: 'S' as const,
         categoria_cod: categoriaCod,
         vendedor_cod: vendedorCod,
         transportadora_cod: transportadoraCod,

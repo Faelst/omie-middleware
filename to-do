@@ -1,3 +1,19 @@
+- Mater syncado a base de dados de produtos do Omie com a Base Edmilson
+
+Status:
+    00 Digitação: Pedidos que nao possui itens atelhados. Apenas o vendedor e cliente.
+    01 Importado: 
+    10 Pendente (Pedido de venda): Quando os items do pedido 
+    20 Em Andamento
+    30 Atendido Parcialmente
+    40 Atendido
+    50 Faturado
+    60 Faturado Parcialmente
+    70 Cancelado
+ 
+
+###################
+
 https://edmilsonrodrigues.com.br/allbanho/mapeamento/itens.html
 
 ###################
