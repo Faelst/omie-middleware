@@ -1,0 +1,27 @@
+meta {
+  name: Consulta
+  type: http
+  seq: 1
+}
+
+post {
+  url: https://app.omie.com.br/api/v1/estoque/consulta/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "call": "ListarPosEstoque",
+    "app_key": "2348634984696",
+    "app_secret": "382ce3ac7538f199dd0cc9fd7383ab20",
+    "param": [
+      {
+        "nPagina": 1,
+        "nRegPorPagina": 1000,
+        "codigo_local_estoque": 0,
+        "lista_local_estoque": ""
+      }
+    ]
+  }
+}

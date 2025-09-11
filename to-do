@@ -1,9 +1,15 @@
 - Mater syncado a base de dados de produtos do Omie com a Base Edmilson
+- Criar script para importar os items do estoque da omie
 
 Status:
     00 Digitação: Pedidos que nao possui itens atelhados. Apenas o vendedor e cliente.
     01 Importado: 
-    10 Pendente (Pedido de venda): Quando os items do pedido 
+    10 Pendente (Pedido de venda):
+      - Validação se tem todos os itens do pedido disponíveis no estoque, que seria a coluna SALDO na tabela de omie_locais_sku
+      - Se tiver todos os itens disponíveis, deve alterar o status para 20 Em Andamento e reserva aquele itens no estoque (diminuir o saldo).
+      - Se nao tiver todos os itens disponíveis, deve permanecer no status 10 Pendente.
+      - Criar flag para identificar que o pedido foi verificado e separado (para evitar que o mesmo pedido fique sendo verificado toda hora). coluna pedido_separado = s/n
+
     20 Em Andamento
     30 Atendido Parcialmente
     40 Atendido

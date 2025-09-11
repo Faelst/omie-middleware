@@ -49,13 +49,25 @@ export class CreateOrUpdateOrderUseCase {
       this.omieServices.orders.consultOrderByOrderCode(omieCodigoPedido),
       this.omieServices.clients.getById(clientId),
       this.omieServices.categories.getByCode(categoriaCod),
-    ]);
+    ]).catch((err) => {
+      this.logger.error(
+        `Erro ao consultar dados do pedido/categoria/cliente omie_codigo_pedido=${omieCodigoPedido}, cliente_cod=${clientId}, categoria_cod=${categoriaCod} - ${err.message}`,
+        err.stack,
+      );
+      return [null, null, null];
+    });
+
+    if (!order) {
+      this.logger.warn(
+        `Pedido não encontrado na Omie omie_codigo_pedido=${omieCodigoPedido}`,
+      );
+      return false;
+    }
 
     const origemPedido = order?.cabecalho?.origem_pedido ?? null;
 
-    //alterar aqui
     const vendedorCod = toNumberOrNull(
-      order?.cabecalho?.codigo_vendedor ?? null,
+      order?.informacoes_adicionais?.codVend ?? null,
     );
     const transportadoraCod = toNumberOrNull(
       order?.frete?.codigo_transportadora ?? null,
