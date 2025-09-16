@@ -6,6 +6,7 @@ import { toNumberOrNull } from '../../../utils/to-number-or-null';
 import { WebhookOrdersDto } from '../dtos/webhook-orders.dto';
 import { parseBrDateToUTC } from '../../../utils/parse-br-date-to-utc.utils';
 import { OmieServices } from '../../../omie/omie.services';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 
 @Injectable()
 export class CreateOrUpdateOrderUseCase {
@@ -14,6 +15,7 @@ export class CreateOrUpdateOrderUseCase {
   constructor(
     @InjectConnection() private readonly knex: Knex,
     private readonly omieServices: OmieServices,
+    private readonly eventEmitter: EventEmitter2,
   ) {}
 
   async execute(dto: WebhookOrdersDto): Promise<boolean> {
@@ -159,6 +161,10 @@ export class CreateOrUpdateOrderUseCase {
           desconto_percent: item.produto.percentual_desconto,
         });
       }
+    });
+
+    this.eventEmitter.emit('order.updated', {
+      orderId: order.cabecalho.codigo_pedido,
     });
 
     return true;

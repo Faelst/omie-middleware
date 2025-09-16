@@ -4,6 +4,7 @@ import { VendorsServices } from './services/vendors/vendors.services';
 import { OrdersServices } from './services/orders/orders.services';
 import { CategoriesServices } from './services/categories/categories.services';
 import { ClientsServices } from './services/clients/clients.services';
+import { StockServices } from './services/stock/stock.services';
 
 @Module({
   providers: [
@@ -12,6 +13,7 @@ import { ClientsServices } from './services/clients/clients.services';
     OrdersServices,
     ClientsServices,
     CategoriesServices,
+    StockServices,
   ],
   exports: [OmieServices],
 })

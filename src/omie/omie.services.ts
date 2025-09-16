@@ -3,6 +3,7 @@ import { VendorsServices } from './services/vendors/vendors.services';
 import { OrdersServices } from './services/orders/orders.services';
 import { ClientsServices } from './services/clients/clients.services';
 import { CategoriesServices } from './services/categories/categories.services';
+import { StockServices } from './services/stock/stock.services';
 
 @Injectable()
 export class OmieServices {
@@ -11,6 +12,7 @@ export class OmieServices {
     private readonly ordersServices: OrdersServices,
     private readonly clientsServices: ClientsServices,
     private readonly categoriesServices: CategoriesServices,
+    private readonly stockServices: StockServices,
   ) {}
 
   get vendors() {
@@ -27,5 +29,9 @@ export class OmieServices {
 
   get categories() {
     return this.categoriesServices;
+  }
+
+  get stock() {
+    return this.stockServices;
   }
 }
