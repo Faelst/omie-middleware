@@ -38,6 +38,11 @@ export class ValidateOrderStockUseCase {
       `Validando estoque para pedido ${payload.orderId} com ${items.length} itens`,
     );
 
+    if (!items.length) {
+      this.logger.warn(`Pedido ${payload.orderId} não possui itens`);
+      return;
+    }
+
     for (const item of items) {
       const product = await this.knex('estoque_locais_sku')
         .where({ sku: item.sku })
