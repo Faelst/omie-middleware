@@ -143,6 +143,10 @@ export class CreateOrUpdateOrderUseCase {
         .where({ order_id: order.cabecalho.codigo_pedido })
         .delete();
 
+      this.logger.log(
+        `Items do pedido omie_codigo_pedido=${omieCodigoPedido} a serem inseridos: ${order?.det?.length || 0}`,
+      );
+
       for (const item of order?.det || []) {
         await trx('omie_order_items').insert({
           order_id: order.cabecalho.codigo_pedido,

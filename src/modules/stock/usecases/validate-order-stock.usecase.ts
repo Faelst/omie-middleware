@@ -40,6 +40,7 @@ export class ValidateOrderStockUseCase {
 
     if (!items.length) {
       this.logger.warn(`Pedido ${payload.orderId} não possui itens`);
+
       return;
     }
 
@@ -57,6 +58,10 @@ export class ValidateOrderStockUseCase {
         this.logger.warn(
           `Estoque insuficiente para SKU ${item.sku}. Necessário: ${item.quantidade}, Disponível: ${product.saldo}`,
         );
+
+        await this.knex('omie_orders')
+          .where({ omie_codigo_pedido: payload.orderId })
+          .update({ pedido_separado: 'n', status_etapa: '10' });
 
         return;
       }
