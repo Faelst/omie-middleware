@@ -1,3 +1,15 @@
+- webhook de atualizacao de estoque
+  LocalEstoque.Alterado
+  LocalEstoque.DefinidoComoPadrao
+  LocalEstoque.Excluido
+  LocalEstoque.Incluido
+  Produto.AjusteEstoque
+  Produto.MovimentacaoEstoque
+  Produto.MovimentacaoEstoque.marketplace
+  Produto.MovimentacaoEstoque.pdv 
+
+###################
+
 - Mater syncado a base de dados de produtos do Omie com a Base Edmilson
 - Criar script para importar os items do estoque da omie
 

@@ -69,7 +69,7 @@ export class ValidateOrderStockUseCase {
     );
 
     await this.knex('omie_orders')
-      .where({ id: payload.orderId })
+      .where({ omie_codigo_pedido: payload.orderId })
       .update({ pedido_separado: 's', status_etapa: '20' });
   }
 }
