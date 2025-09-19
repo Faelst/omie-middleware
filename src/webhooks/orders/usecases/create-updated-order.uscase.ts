@@ -8,7 +8,6 @@ import { parseBrDateToUTC } from '../../../utils/parse-br-date-to-utc.utils';
 import { OmieServices } from '../../../omie/omie.services';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { flagContaCorrente } from '../../../utils/flag-conta-corrente.utils';
-import { resolveShippingAddress } from '../../../utils/resolve-shipping-address.utils';
 
 @Injectable()
 export class CreateOrUpdateOrderUseCase {
@@ -121,7 +120,7 @@ export class CreateOrUpdateOrderUseCase {
         etapa_descricao: etapaDescr,
         updated_at: now,
         bloqueado: isBlocked,
-        endereco_entrega: address?.line || null,
+        // endereco_entrega: address?.line || null,
       };
 
       if (!existing) {
