@@ -7,6 +7,8 @@ import { WebhookOrdersDto } from '../dtos/webhook-orders.dto';
 import { parseBrDateToUTC } from '../../../utils/parse-br-date-to-utc.utils';
 import { OmieServices } from '../../../omie/omie.services';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { flagContaCorrente } from '../../../utils/flag-conta-corrente.utils';
+import { resolveShippingAddress } from '../../../utils/resolve-shipping-address.utils';
 
 @Injectable()
 export class CreateOrUpdateOrderUseCase {
@@ -84,6 +86,8 @@ export class CreateOrUpdateOrderUseCase {
       ? await this.omieServices.clients.getById(transportadoraCod)
       : null;
     const now = new Date();
+    const isBlocked = flagContaCorrente(order?.informacoes_adicionais);
+    // const address = resolveShippingAddress(order, client);
 
     await this.knex.transaction(async (trx) => {
       const existing = await trx('omie_orders')
@@ -116,6 +120,8 @@ export class CreateOrUpdateOrderUseCase {
         transportadora_nome: deliverer?.razao_social || null,
         etapa_descricao: etapaDescr,
         updated_at: now,
+        bloqueado: isBlocked,
+        endereco_entrega: address?.line || null,
       };
 
       if (!existing) {

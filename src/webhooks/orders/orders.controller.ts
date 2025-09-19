@@ -11,6 +11,7 @@ export class OrdersController {
   @Post('')
   @HttpCode(200)
   async omieWebhook(@Body() body: WebhookOrdersDto): Promise<boolean> {
+    console.log('Recebido webhook de pedidos', body);
     return this.createOrUpdateOrderUseCase.execute(body);
   }
 }

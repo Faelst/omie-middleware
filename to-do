@@ -1,3 +1,10 @@
+- se chegar um novo registro da omei para cadastrar uma nova ordem de venda, e estiver com o tipo de pagamento "SEM PAGAMENTO", deve cadastrar a ordem de venda com status "BLOQUEADO = S" (coluna bloqueado da tabela omie_orders)
+- e se o campo codigo_conta_corrente for atualizado para qualquer valor, deve atualizar o campo bloqueado para "N".
+
+- Criar coluna "endereco_entrega" na tabela omie_orders para armazenar o endereco de entrega do pedido
+
+###################
+
 - webhook de atualizacao de estoque
   LocalEstoque.Alterado
   LocalEstoque.DefinidoComoPadrao
